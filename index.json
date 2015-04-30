@@ -1,0 +1,31 @@
+[
+	{
+		"name": "test_1.ogg",
+		"bytes": 32652,
+		"type": "ogg"
+	}, {
+		"name": "test_2.ogg",
+		"bytes": 288992,
+		"type": "ogg"
+	}, {
+		"name": "test_3.ogg",
+		"bytes": 248486,
+		"type": "ogg"
+	}, {
+		"name": "test_4.wav",
+		"bytes": 23868,
+		"type": "wav"
+	}, {
+		"name": "test_5.wav",
+		"bytes": 222310,
+		"type": "wav"
+	}, {
+		"name": "test_6.wav",
+		"bytes": 2915288,
+		"type": "wav"
+	}, {
+		"name": "test_7.flac",
+		"bytes": 2370313,
+		"type": "flac"
+	}
+]
