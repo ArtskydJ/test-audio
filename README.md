@@ -2,6 +2,8 @@ test-audio
 ==========
 
 [![Build Status](https://travis-ci.org/ArtskydJ/test-audio.svg)](https://travis-ci.org/ArtskydJ/test-audio)
+[![Dependency Status](https://david-dm.org/artskydj/test-audio.svg)](https://david-dm.org/artskydj/test-audio)
+[![devDependency Status](https://david-dm.org/artskydj/test-audio/dev-status.svg)](https://david-dm.org/artskydj/test-audio#info=devDependencies)
 
 A small collection of ogg, wav, and flac files, for testing!
 
