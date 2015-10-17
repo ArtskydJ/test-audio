@@ -1,7 +1,7 @@
 {
   "name": "test-audio",
   "version": "1.0.0",
-  "description": "A small collection of ogg, wav, and flac files, for testing!",
+  "description": "A tiny collection of ogg, wav, flac, and mp3 files, for testing!",
   "main": "index.json",
   "repository": {
     "type": "git",
@@ -14,15 +14,16 @@
     "test",
     "audio",
     "sound",
-	"music"
+    "music"
   ],
   "author": "Joseph Dykstra",
   "bugs": {
     "url": "https://github.com/ArtskydJ/test-audio/issues"
   },
   "homepage": "https://github.com/ArtskydJ/test-audio",
+  "dependencies": {},
   "devDependencies": {
+    "musicmetadata": "^2.0.2",
     "tape": "^4.0.0"
-  },
-  "dependencies": {}
+  }
 }

@@ -1,38 +1,15 @@
 var test = require('tape')
 var fs = require('fs')
 var path = require('path')
-var audioFiles = require('./')
-var RE = /^test_\d+\.\w+/
+var mm = require('musicmetadata')
+var audioFiles = require('./')()
 
-var audioFiles2 = audioFiles.reduce(function (memo, file) {
-	memo[file.name] = {
-		bytes: file.bytes,
-		type: file.type
-	}
-	return memo
-}, {})
-
-test('helpers', function (t) {
-	t.ok( RE.test('test_1.ogg') )
-	t.ok( RE.test('test_379.cool') )
-	t.ok( RE.test('test_00.ridiculous') )
-	t.notOk( RE.test('test_.ogg') )
-	t.notOk( RE.test('test98.ogg') )
-	t.notOk( RE.test('test_64.') )
-	t.notOk( RE.test('test_6') )
-	t.notOk( RE.test('test.js') )
-	t.notOk( RE.test('WATtest_3.wav') )
-	t.end()
-})
-
-test('every audio file is included and has correct metadata', function (t) {
+test('correct returned result', function (t) {
 	t.plan(audioFiles.length * 3)
 
-	var filenames = fs.readdirSync('./')
-
-	filenames.filter(RE.test.bind(RE)).forEach(function (filename) {
-		var stat = fs.statSync(filename)
-		var meta = audioFiles2[filename]
+	fs.readdirSync('./audio').forEach(function (filename, index) {
+		var stat = fs.statSync('./audio/' + filename)
+		var meta = audioFiles[index]
 		var ext = path.extname(filename)
 
 		t.ok(stat.isFile(), filename + ' is a file')
@@ -40,4 +17,35 @@ test('every audio file is included and has correct metadata', function (t) {
 		t.equal(ext, '.' + meta.type, filename + ' is a ' + meta.type)
 	})
 	t.end()
+})
+
+test('exact returned result', function (t) {
+	t.deepEqual(audioFiles[0], { name: '30047__corsica-s__drippy.flac', bytes: 24686, type: 'flac', path: audioFiles[0].path })
+	t.deepEqual(audioFiles[1], { name: '50775__smcameron__drips2.ogg',  bytes: 67338, type: 'ogg',  path: audioFiles[1].path })
+	t.deepEqual(audioFiles[2], { name: '75344__neotone__drip2.wav',     bytes: 36792, type: 'wav',  path: audioFiles[2].path })
+	t.deepEqual(audioFiles[3], { name: '8000__cfork__cf-fx-bloibb.mp3', bytes: 23302, type: 'mp3',  path: audioFiles[3].path })
+	t.end()
+})
+
+test('music tags', function (t) {
+	var testAudioFiles = audioFiles.filter(function (meta) {
+		return meta.type !== 'wav'
+	})
+	t.plan(testAudioFiles.length * 5)
+
+	var expectMetadata = {
+		'30047__corsica-s__drippy.flac': { artist: 'corsica', title: 'drippy', album: 'test drips', trackNumber: 1 },
+		'50775__smcameron__drips2.ogg': { artist: 'Stephen M. Cameron', title: 'drips2', album: 'test drips', trackNumber: 2 },
+		'8000__cfork__cf-fx-bloibb.mp3': { artist: 'cfork.net', title: 'cf_FX_bloibb', album: 'test drips', trackNumber: 4 }
+	}
+
+	testAudioFiles.forEach(function (meta) {
+		mm(fs.createReadStream(meta.path), function (err, tags) {
+			t.notOk(err)
+			t.equal(tags.artist[0], expectMetadata[meta.name].artist)
+			t.equal(tags.title, expectMetadata[meta.name].title)
+			t.equal(tags.album, expectMetadata[meta.name].album)
+			t.equal(tags.track.no, expectMetadata[meta.name].trackNumber)
+		})
+	})
 })
