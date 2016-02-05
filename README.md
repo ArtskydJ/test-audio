@@ -27,6 +27,22 @@ console.log(testAudio)
   { name: '8000__cfork__cf-fx-bloibb.mp3',
     bytes: 23302,
     type: 'mp3',
+    path: 'C:\\Users\\Michael\\Github\\test-audio\\audio\\8000__cfork__cf-fx-bloibb.mp3' },
+  flac: { name: '30047__corsica-s__drippy.flac', // Alias for element [0]
+    bytes: 24686,
+    type: 'flac',
+    path: 'C:\\Users\\Michael\\Github\\test-audio\\audio\\30047__corsica-s__drippy.flac' },
+  ogg: { name: '50775__smcameron__drips2.ogg', // Alias for element [1]
+    bytes: 67338,
+    type: 'ogg',
+    path: 'C:\\Users\\Michael\\Github\\test-audio\\audio\\50775__smcameron__drips2.ogg' },
+  wav: { name: '75344__neotone__drip2.wav', // Alias for element [2]
+    bytes: 36792,
+    type: 'wav',
+    path: 'C:\\Users\\Michael\\Github\\test-audio\\audio\\75344__neotone__drip2.wav' },
+  mp3: { name: '8000__cfork__cf-fx-bloibb.mp3', // Alias for element [3]
+    bytes: 23302,
+    type: 'mp3',
     path: 'C:\\Users\\Michael\\Github\\test-audio\\audio\\8000__cfork__cf-fx-bloibb.mp3' } ]
 ```
 
@@ -44,6 +60,8 @@ var getTestAudio = require('test-audio')
 - `bytes` is the size of the file in bytes, e.g. `23868`
 - `type` is the extension of the file, e.g. `'wav'`
 - `path` is the absolute path of the file
+
+There are also properties on the array, corresponding to the type. E.g. `files.mp3` is the same as `files[3]`.
 
 # credits
 

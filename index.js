@@ -4,7 +4,7 @@ var path = require('path')
 module.exports = function () {
 	var audioDir = path.join(__dirname, 'audio')
 
-	return fs.readdirSync(audioDir).map(function(filename) {
+	var array = fs.readdirSync(audioDir).map(function(filename) {
 		var audioFile = path.join(audioDir, filename)
 		var stats = fs.statSync(audioFile)
 
@@ -15,4 +15,10 @@ module.exports = function () {
 			path: audioFile
 		}
 	})
+
+	array.forEach(function (obj) {
+		array[obj.type] = obj
+	})
+
+	return array
 }

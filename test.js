@@ -24,6 +24,10 @@ test('exact returned result', function (t) {
 	t.deepEqual(audioFiles[1], { name: '50775__smcameron__drips2.ogg',  bytes: 67338, type: 'ogg',  path: audioFiles[1].path })
 	t.deepEqual(audioFiles[2], { name: '75344__neotone__drip2.wav',     bytes: 36792, type: 'wav',  path: audioFiles[2].path })
 	t.deepEqual(audioFiles[3], { name: '8000__cfork__cf-fx-bloibb.mp3', bytes: 23302, type: 'mp3',  path: audioFiles[3].path })
+	t.deepEqual(audioFiles[0], audioFiles.flac)
+	t.deepEqual(audioFiles[1], audioFiles.ogg)
+	t.deepEqual(audioFiles[2], audioFiles.wav)
+	t.deepEqual(audioFiles[3], audioFiles.mp3)
 	t.end()
 })
 
